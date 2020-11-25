@@ -36,6 +36,14 @@ Route.group(() => {
   Route.get("/", "BannerController.list");
 }).prefix("banner");
 
+Route.group(() => {
+  Route.post("/", "CadastroController.enviar");
+}).prefix("cadastro");
+
+Route.group(() => {
+  Route.post("/", "LoginController.logar");
+}).prefix("login");
+
 Route.get("/", () => {
   return { greeting: "Ola amigo" };
 });

@@ -23,7 +23,7 @@ class FtpUpload {
     try {
       await client.access(this.config);
       console.log("TESTE", await client.list("../"));
-      // await client.uploadFrom(pathUpload, pathFTP);
+      await client.uploadFrom(pathUpload, fileName);
       return fileName;
     } catch (error) {
       throw { status: 400, message: error };

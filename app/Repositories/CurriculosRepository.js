@@ -30,7 +30,7 @@ class CurriculosRepository {
     } catch (error) {
       throw {
         status: 400,
-        message: "Erro ao gravar o registro no banco de dados",
+        message: error,
       };
     }
   }

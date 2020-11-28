@@ -11,7 +11,6 @@ class FtpUpload {
   }
 
   async store(file, caminho) {
-    console.log(Env.get("FTP_HOST"));
     const pathUpload = `${file.tmpPath}`;
 
     const fileName = `${new Date().getTime()}.${file.extname}`;
@@ -23,7 +22,7 @@ class FtpUpload {
 
     try {
       await client.access(this.config);
-      // console.log(await client.list());
+      console.log("TESTE", await client.list());
       await client.uploadFrom(pathUpload, pathFTP);
       return fileName;
     } catch (error) {

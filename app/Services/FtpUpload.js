@@ -21,6 +21,7 @@ class FtpUpload {
     client.ftp.verbose = true;
 
     try {
+      console.log(await client.list());
       await client.access(this.config);
       await client.uploadFrom(pathUpload, pathFTP);
       return fileName;

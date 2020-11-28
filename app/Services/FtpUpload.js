@@ -15,7 +15,7 @@ class FtpUpload {
 
     const fileName = `${new Date().getTime()}.${file.extname}`;
 
-    const pathFTP = `/${caminho}/${fileName}`;
+    const pathFTP = `/home/casabelavistavr/${caminho}/${fileName}`;
 
     const client = new Ftp.Client();
     client.ftp.verbose = true;
@@ -23,6 +23,7 @@ class FtpUpload {
     try {
       await client.access(this.config);
       console.log("TESTE", await client.list());
+      console.log("TESTE", await client.uploadFrom(pathUpload, pathFTP));
       await client.uploadFrom(pathUpload, pathFTP);
       return fileName;
     } catch (error) {

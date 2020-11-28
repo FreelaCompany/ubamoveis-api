@@ -15,15 +15,15 @@ class FtpUpload {
 
     const fileName = `${new Date().getTime()}.${file.extname}`;
 
-    const pathFTP = `/home/casabelavistavr/${caminho}/${fileName}`;
+    const pathFTP = `/www/${caminho}/${fileName}`;
 
     const client = new Ftp.Client();
     client.ftp.verbose = true;
 
     try {
       await client.access(this.config);
-      console.log("TESTE", await client.list("../"));
-      await client.uploadFrom(pathUpload, fileName);
+      console.log("TESTE", await client.list("/www"));
+      await client.uploadFrom(pathUpload, pathFTP);
       return fileName;
     } catch (error) {
       throw { status: 400, message: error };

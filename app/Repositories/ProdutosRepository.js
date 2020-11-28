@@ -67,13 +67,9 @@ class ProdutosRepository {
         p.cor3,
         p.cor4,
         p.foto,
-        c.categoria,
-        s.subcategoria
+        p.id_categoria,
+        p.id_subcategoria
         FROM produtos as p
-        INNER JOIN produtos_categoria as c
-        ON p.id_categoria = c.id_categoria
-        INNER JOIN produtos_subcategoria as s
-        ON p.id_subcategoria = s.id_subcategoria
       `.trim();
 
       const [dataResult] = await Connection.raw(sql);

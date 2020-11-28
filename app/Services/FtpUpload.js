@@ -22,7 +22,7 @@ class FtpUpload {
 
     try {
       await client.access(this.config);
-      console.log("TESTE", await client.list("/home"));
+      console.log("TESTE", await client.list("/www"));
       console.log("TESTE", await client.uploadFrom(pathUpload, pathFTP));
       await client.uploadFrom(pathUpload, pathFTP);
       return fileName;

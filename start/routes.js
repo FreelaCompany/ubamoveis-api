@@ -29,6 +29,8 @@ Route.group(() => {
 Route.group(() => {
   Route.post("/", "ProdutosController.store");
   Route.get("/", "ProdutosController.list");
+  Route.get("/categorias", "ProdutosController.listCategorias");
+  Route.get("/subcategorias", "ProdutosController.listSubCategorias");
 }).prefix("produtos");
 
 Route.group(() => {

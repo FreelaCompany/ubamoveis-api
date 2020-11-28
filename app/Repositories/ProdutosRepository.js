@@ -87,6 +87,38 @@ class ProdutosRepository {
     const produtosBaseUrl = "http://www.casabelavistavr.com.br/produtos/";
     return { ...rest, foto: `${produtosBaseUrl}${foto}` };
   }
+
+  async listCategorias({ request }) {
+    try {
+      const sql = `
+        SELECT
+        *
+        FROM produtos_categoria
+      `.trim();
+
+      const [dataResult] = await Connection.raw(sql);
+
+      return { data: dataResult };
+    } catch (error) {
+      throw { status: 404, message: "Não existem categorias cadastradas" };
+    }
+  }
+
+  async listSubCategorias({ request }) {
+    try {
+      const sql = `
+        SELECT
+        *
+        FROM produtos_subcategoria
+      `.trim();
+
+      const [dataResult] = await Connection.raw(sql);
+
+      return { data: dataResult };
+    } catch (error) {
+      throw { status: 404, message: "Não existem subcategorias cadastradas" };
+    }
+  }
 }
 
 module.exports = ProdutosRepository;

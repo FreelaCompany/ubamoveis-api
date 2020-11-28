@@ -15,7 +15,7 @@ class FtpUpload {
 
     const fileName = `${new Date().getTime()}.${file.extname}`;
 
-    const pathFTP = `/home/casabelavistavr/www/${caminho}/${fileName}`;
+    const pathFTP = `/www/${caminho}/${fileName}`;
 
     const client = new Ftp.Client();
     client.ftp.verbose = true;

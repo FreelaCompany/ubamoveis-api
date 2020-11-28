@@ -20,12 +20,12 @@ class FtpUpload {
     const client = new Ftp.Client();
     client.ftp.verbose = true;
 
-    console.log(await client.list());
     try {
       await client.access(this.config);
       await client.uploadFrom(pathUpload, pathFTP);
       return fileName;
     } catch (error) {
+      console.log(await client.list());
       throw { status: 400, message: error };
     }
   }

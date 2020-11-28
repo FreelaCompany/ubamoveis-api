@@ -80,7 +80,7 @@ class ProdutosRepository {
       const data = dataResult.map((produtoUnit) =>
         this.produtosMapper(produtoUnit)
       );
-      return data;
+      return { data: data };
     } catch (error) {
       throw { status: 404, message: "Não existem produtos cadastrados" };
     }

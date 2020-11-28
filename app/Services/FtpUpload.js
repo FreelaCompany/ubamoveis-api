@@ -25,7 +25,7 @@ class FtpUpload {
       await client.uploadFrom(pathUpload, pathFTP);
       return fileName;
     } catch (error) {
-      throw { status: 400, message: "Ops! Algo deu errado. Tente novamente." };
+      throw { status: 400, message: error };
     }
   }
 }

@@ -19,7 +19,7 @@ class FtpUpload {
     const pathFTP = `/${caminho}/${fileName}`;
 
     const client = new Ftp.Client();
-    // client.ftp.verbose = true;
+    client.ftp.verbose = true;
 
     try {
       await client.access(this.config);

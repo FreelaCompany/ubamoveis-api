@@ -56,6 +56,7 @@ class ProdutosRepository {
     try {
       const sql = `
         SELECT
+        p.id_produto,
         p.nome,
         p.preco,
         p.validade_preco,

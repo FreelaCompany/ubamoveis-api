@@ -32,7 +32,8 @@ class LoginRepository {
       }
 
       return {
-        data: dataResult[0],
+        nome: dataResult[0].name,
+        email: dataResult[0].email,
       };
     } catch (error) {
       throw {

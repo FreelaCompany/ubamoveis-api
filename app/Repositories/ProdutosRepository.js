@@ -71,6 +71,7 @@ class ProdutosRepository {
         p.id_categoria,
         p.id_subcategoria
         FROM produtos as p
+        ORDER BY p.id_produto DESC
       `.trim();
 
       const [dataResult] = await Connection.raw(sql);

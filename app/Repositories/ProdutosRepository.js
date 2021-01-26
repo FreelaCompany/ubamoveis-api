@@ -106,6 +106,23 @@ class ProdutosRepository {
     }
   }
 
+  async delete({ params }) {
+    try {
+      const { id } = params;
+
+      const sql = `
+      DELETE FROM produtos WHERE id_produto = ${id}
+      `.trim();
+
+      await Connection.raw(sql);
+    } catch (error) {
+      throw {
+        status: 400,
+        message: "Erro ao gravar o registro no banco de dados",
+      };
+    }
+  }
+
   async listSubCategorias({ request }) {
     try {
       const sql = `

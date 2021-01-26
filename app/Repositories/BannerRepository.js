@@ -33,9 +33,9 @@ class BannerRepository {
     }
   }
 
-  async delete({ request }) {
+  async delete({ params }) {
     try {
-      const { id } = request.post();
+      const { id } = params;
 
       const sql = `
       DELETE FROM banner_home WHERE id_banner = ${id}

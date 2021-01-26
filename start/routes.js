@@ -31,11 +31,12 @@ Route.group(() => {
   Route.get("/", "ProdutosController.list");
   Route.get("/categorias", "ProdutosController.listCategorias");
   Route.get("/subcategorias", "ProdutosController.listSubCategorias");
+  Route.delete("/:id", "ProdutosController.delete");
 }).prefix("produtos");
 
 Route.group(() => {
   Route.post("/", "BannerController.store");
-  Route.delete("/", "BannerController.delete");
+  Route.delete("/:id", "BannerController.delete");
   Route.get("/", "BannerController.list");
 }).prefix("banner");
 

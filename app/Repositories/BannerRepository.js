@@ -33,6 +33,23 @@ class BannerRepository {
     }
   }
 
+  async delete({ request }) {
+    try {
+      const { id } = request.post();
+
+      const sql = `
+      DELETE FROM banner_home WHERE id_banner = ${id}
+      `.trim();
+
+      await Connection.raw(sql);
+    } catch (error) {
+      throw {
+        status: 400,
+        message: "Erro ao gravar o registro no banco de dados",
+      };
+    }
+  }
+
   async list({ request }) {
     try {
       const sql = `

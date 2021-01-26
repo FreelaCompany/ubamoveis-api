@@ -35,6 +35,7 @@ Route.group(() => {
 
 Route.group(() => {
   Route.post("/", "BannerController.store");
+  Route.delete("/", "BannerController.delete");
   Route.get("/", "BannerController.list");
 }).prefix("banner");
 

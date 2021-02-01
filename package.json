@@ -1,13 +1,16 @@
 {
   "name": "adonis-api-app",
-  "version": "4.1.0",
+  "version": "5.0.0",
   "adonis-version": "4.1.0",
   "description": "Adonisjs boilerplate for API server with pre-configured JWT",
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
     "test": "node ace test",
-    "dev": "adonis serve --dev"
+    "dev": "adonis serve --dev",
+    "patch": "yarn version --patch",
+    "end-sprint": "yarn version --minor",
+    "release": "yarn version --major"
   },
   "keywords": [
     "adonisjs",

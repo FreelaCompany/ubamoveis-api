@@ -18,7 +18,6 @@ class ProdutosRepository {
         cor2,
         cor3,
         cor4,
-        foto,
         id_categoria,
         id_subcategoria,
       } = request.post();
@@ -44,6 +43,79 @@ class ProdutosRepository {
       `.trim();
 
       await Connection.raw(sql);
+    } catch (error) {
+      throw {
+        status: 400,
+        message: "Erro ao gravar o registro no banco de dados",
+      };
+    }
+  }
+
+  async edit({ request }) {
+    try {
+      const {
+        id,
+        nome,
+        preco,
+        validade_preco,
+        largura,
+        altura,
+        profundidade,
+        cor1,
+        cor2,
+        cor3,
+        cor4,
+        foto,
+        id_categoria,
+        id_subcategoria,
+      } = request.post();
+
+      if (foto === undefined) {
+        const file = request.file("foto");
+
+        const uploadFile = await new FtpUpload().store(file, "produtos");
+
+        const sql = `
+      UPDATE produtos
+        SET nome = '${nome}',
+        preco = '${preco}',
+        validade_preco = '${validade_preco}',
+        largura = '${largura}',
+        altura = '${altura}',
+        profundidade = '${profundidade}',
+        cor1 = '${cor1}',
+        cor2 = '${cor2}',
+        cor3 = '${cor3}',
+        cor4 = '${cor4}',
+        foto = '${uploadFile}',
+        id_categoria = ${id_categoria},
+        id_subcategoria = ${id_subcategoria},
+        data_update = NOW()
+        WHERE id_produto = ${id}
+      `.trim();
+
+        await Connection.raw(sql);
+      } else {
+        const sql = `
+        UPDATE produtos
+          SET nome = '${nome}',
+          preco = '${preco}',
+          validade_preco = '${validade_preco}',
+          largura = '${largura}',
+          altura = '${altura}',
+          profundidade = '${profundidade}',
+          cor1 = '${cor1}',
+          cor2 = '${cor2}',
+          cor3 = '${cor3}',
+          cor4 = '${cor4}',
+          id_categoria = ${id_categoria},
+          id_subcategoria = ${id_subcategoria},
+          data_update = NOW()
+          WHERE id_produto = ${id}
+        `.trim();
+
+        await Connection.raw(sql);
+      }
     } catch (error) {
       throw {
         status: 400,

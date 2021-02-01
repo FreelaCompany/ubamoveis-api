@@ -55,7 +55,7 @@ class BannerRepository {
         banner_mobile = '${uploadBannerMobile}',
         link = '${link}',
         data_update = NOW()
-        WHERE id_produto = ${id}
+        WHERE id_banner = ${id}
       `.trim();
 
         await Connection.raw(sql);
@@ -69,7 +69,7 @@ class BannerRepository {
         SET banner = '${uploadBanner}',
         link = '${link}',
         data_update = NOW()
-        WHERE id_produto = ${id}
+        WHERE id_banner = ${id}
       `.trim();
 
         await Connection.raw(sql);
@@ -86,7 +86,7 @@ class BannerRepository {
         SET banner_mobile = '${uploadBannerMobile}',
         link = '${link}',
         data_update = NOW()
-        WHERE id_produto = ${id}
+        WHERE id_banner = ${id}
       `.trim();
 
         await Connection.raw(sql);
@@ -95,7 +95,7 @@ class BannerRepository {
         UPDATE banner_home
           SET link = '${link}',
           data_update = NOW()
-          WHERE id_produto = ${id}
+          WHERE id_banner = ${id}
         `.trim();
 
         await Connection.raw(sql);

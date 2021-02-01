@@ -33,6 +33,98 @@ class BannerRepository {
     }
   }
 
+  async edit({ request }) {
+    try {
+      const { link, id, banner, banner_mobile } = request.post();
+
+      if (banner === undefined && banner_mobile === undefined) {
+        const banner = request.file("banner");
+
+        const uploadBanner = await new FtpUpload().store(banner, "banner");
+
+        const banner_mobile = request.file("banner_mobile");
+
+        const uploadBannerMobile = await new FtpUpload().store(
+          banner_mobile,
+          "banner_mobile"
+        );
+
+        const sql = `
+      UPDATE banner_home
+        SET banner = '${uploadBanner}',
+        banner_mobile = '${uploadBannerMobile}',
+        link = '${link}',
+        data_update = NOW()
+        WHERE id_produto = ${id}
+      `.trim();
+
+        await Connection.raw(sql);
+      } else if (banner === undefined && banner_mobile !== undefined) {
+        const banner = request.file("banner");
+
+        const uploadBanner = await new FtpUpload().store(banner, "banner");
+
+        const sql = `
+      UPDATE banner_home
+        SET banner = '${uploadBanner}',
+        link = '${link}',
+        data_update = NOW()
+        WHERE id_produto = ${id}
+      `.trim();
+
+        await Connection.raw(sql);
+      } else if (banner !== undefined && banner_mobile === undefined) {
+        const banner_mobile = request.file("banner_mobile");
+
+        const uploadBannerMobile = await new FtpUpload().store(
+          banner_mobile,
+          "banner_mobile"
+        );
+
+        const sql = `
+      UPDATE banner_home
+        SET banner_mobile = '${uploadBannerMobile}',
+        link = '${link}',
+        data_update = NOW()
+        WHERE id_produto = ${id}
+      `.trim();
+
+        await Connection.raw(sql);
+      } else {
+        const sql = `
+        UPDATE banner_home
+          SET link = '${link}',
+          data_update = NOW()
+          WHERE id_produto = ${id}
+        `.trim();
+
+        await Connection.raw(sql);
+      }
+
+      const banner = request.file("banner");
+
+      const uploadBanner = await new FtpUpload().store(banner, "banner");
+
+      const banner_mobile = request.file("banner_mobile");
+
+      const uploadBannerMobile = await new FtpUpload().store(
+        banner_mobile,
+        "banner_mobile"
+      );
+
+      const sql = `
+      INSERT INTO banner_home (banner, banner_mobile, link, data_cadastro) VALUES ('${uploadBanner}', '${uploadBannerMobile}','${link}', NOW())
+      `.trim();
+
+      await Connection.raw(sql);
+    } catch (error) {
+      throw {
+        status: 400,
+        message: "Erro ao gravar o registro no banco de dados",
+      };
+    }
+  }
+
   async delete({ params }) {
     try {
       const { id } = params;

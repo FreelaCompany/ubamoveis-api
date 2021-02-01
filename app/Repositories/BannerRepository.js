@@ -100,23 +100,6 @@ class BannerRepository {
 
         await Connection.raw(sql);
       }
-
-      const banner = request.file("banner");
-
-      const uploadBanner = await new FtpUpload().store(banner, "banner");
-
-      const banner_mobile = request.file("banner_mobile");
-
-      const uploadBannerMobile = await new FtpUpload().store(
-        banner_mobile,
-        "banner_mobile"
-      );
-
-      const sql = `
-      INSERT INTO banner_home (banner, banner_mobile, link, data_cadastro) VALUES ('${uploadBanner}', '${uploadBannerMobile}','${link}', NOW())
-      `.trim();
-
-      await Connection.raw(sql);
     } catch (error) {
       throw {
         status: 400,

@@ -131,6 +131,7 @@ class BannerRepository {
         SELECT
           *
         FROM banner_home
+        ORDER BY id_banner DESC
       `.trim();
 
       const [dataResult] = await Connection.raw(sql);

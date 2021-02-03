@@ -19,11 +19,13 @@ const Route = use("Route");
 Route.group(() => {
   Route.post("/", "CurriculosController.store");
   Route.get("/", "CurriculosController.list");
+  Route.delete("/:id", "CurriculosController.delete");
 }).prefix("curriculos");
 
 Route.group(() => {
   Route.post("/", "NewsletterController.store");
   Route.get("/", "NewsletterController.list");
+  Route.delete("/:id", "NewsletterController.delete");
 }).prefix("newsletter");
 
 Route.group(() => {

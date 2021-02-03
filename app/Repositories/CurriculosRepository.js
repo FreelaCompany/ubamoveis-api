@@ -53,6 +53,23 @@ class CurriculosRepository {
     }
   }
 
+  async delete({ params }) {
+    try {
+      const { id } = params;
+
+      const sql = `
+      DELETE FROM trabalhe_conosco WHERE id_curriculo = ${id}
+      `.trim();
+
+      await Connection.raw(sql);
+    } catch (error) {
+      throw {
+        status: 400,
+        message: "Erro ao gravar o registro no banco de dados",
+      };
+    }
+  }
+
   curriculosMapper(curriculoUnit) {
     const { curriculo, ...rest } = curriculoUnit;
     const curriculosBaseUrl = "http://www.casabelavistavr.com.br/curriculos/";

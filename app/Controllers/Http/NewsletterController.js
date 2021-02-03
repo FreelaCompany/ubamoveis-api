@@ -18,6 +18,18 @@ class NewsletterController {
     }
   }
 
+  async delete({ params, response }) {
+    try {
+      return await new Repo().delete({ params });
+    } catch (error) {
+      return response.status(error.status || 400).send({
+        error: {
+          message: error.message || "Erro ao consultar a api",
+        },
+      });
+    }
+  }
+
   async list({ request, response }) {
     try {
       return await new Repo().list({ request });

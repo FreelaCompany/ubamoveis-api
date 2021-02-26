@@ -20,11 +20,14 @@ class ProdutosRepository {
         cor4,
         id_categoria,
         id_subcategoria,
+        mostrar_preco,
       } = request.post();
 
       const file = request.file("foto");
 
       const uploadFile = await new FtpUpload().store(file, "produtos");
+
+      const verPreco = mostrar_preco === "true" ? 1 : 0;
 
       const sql = `
       INSERT INTO produtos (nome,
@@ -38,8 +41,9 @@ class ProdutosRepository {
         cor3,
         cor4,
         foto,
+        mostrar_preco,
         id_categoria,
-        id_subcategoria,data_cadastro) VALUES ('${nome}', '${preco}','${validade_preco}', '${largura}', '${altura}', '${profundidade}','${cor1}', '${cor2}','${cor3}', '${cor4}', '${uploadFile}', ${id_categoria},${id_subcategoria}, NOW())
+        id_subcategoria,data_cadastro) VALUES ('${nome}', '${preco}','${validade_preco}', '${largura}', '${altura}', '${profundidade}','${cor1}', '${cor2}','${cor3}', '${cor4}', '${uploadFile}', ${verPreco}, ${id_categoria},${id_subcategoria}, NOW())
       `.trim();
 
       await Connection.raw(sql);
@@ -66,9 +70,14 @@ class ProdutosRepository {
         cor3,
         cor4,
         foto,
+        mostrar_preco,
         id_categoria,
         id_subcategoria,
       } = request.post();
+
+      console.log(mostrar_preco);
+
+      const verPreco = mostrar_preco === "true" ? 1 : 0;
 
       if (foto === undefined) {
         const file = request.file("foto");
@@ -88,6 +97,7 @@ class ProdutosRepository {
         cor3 = '${cor3}',
         cor4 = '${cor4}',
         foto = '${uploadFile}',
+        mostrar_preco = ${verPreco},
         id_categoria = ${id_categoria},
         id_subcategoria = ${id_subcategoria},
         data_update = NOW()
@@ -108,6 +118,7 @@ class ProdutosRepository {
           cor2 = '${cor2}',
           cor3 = '${cor3}',
           cor4 = '${cor4}',
+          mostrar_preco = ${verPreco},
           id_categoria = ${id_categoria},
           id_subcategoria = ${id_subcategoria},
           data_update = NOW()
@@ -140,6 +151,7 @@ class ProdutosRepository {
         p.cor3,
         p.cor4,
         p.foto,
+        p.mostrar_preco,
         p.id_categoria,
         p.id_subcategoria
         FROM produtos as p
@@ -157,9 +169,13 @@ class ProdutosRepository {
   }
 
   produtosMapper(produtoUnit) {
-    const { foto, ...rest } = produtoUnit;
+    const { mostrar_preco, foto, ...rest } = produtoUnit;
     const produtosBaseUrl = "http://www.casabelavistavr.com.br/produtos/";
-    return { ...rest, foto: `${produtosBaseUrl}${foto}` };
+    return {
+      ...rest,
+      foto: `${produtosBaseUrl}${foto}`,
+      mostrar_preco: mostrar_preco === 1 ? true : false,
+    };
   }
 
   async listCategorias({ request }) {

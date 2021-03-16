@@ -170,7 +170,7 @@ class ProdutosRepository {
 
   produtosMapper(produtoUnit) {
     const { mostrar_preco, foto, ...rest } = produtoUnit;
-    const produtosBaseUrl = "http://www.casabelavistavr.com.br/produtos/";
+    const produtosBaseUrl = "http://www.ubamoveis.com.br/produtos/";
     return {
       ...rest,
       foto: `${produtosBaseUrl}${foto}`,

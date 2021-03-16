@@ -72,7 +72,7 @@ class CurriculosRepository {
 
   curriculosMapper(curriculoUnit) {
     const { curriculo, ...rest } = curriculoUnit;
-    const curriculosBaseUrl = "http://www.casabelavistavr.com.br/curriculos/";
+    const curriculosBaseUrl = "http://www.ubamoveis.com.br/curriculos/";
     return { ...rest, curriculo: `${curriculosBaseUrl}${curriculo}` };
   }
 }

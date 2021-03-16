@@ -146,9 +146,8 @@ class BannerRepository {
 
   bannerMapper(bannerUnit) {
     const { banner, banner_mobile, ...rest } = bannerUnit;
-    const bannerBaseUrl = "http://www.casabelavistavr.com.br/banner/";
-    const bannerMobileBaseUrl =
-      "http://www.casabelavistavr.com.br/banner_mobile/";
+    const bannerBaseUrl = "http://www.ubamoveis.com.br/banner/";
+    const bannerMobileBaseUrl = "http://www.ubamoveis.com.br/banner_mobile/";
     return {
       ...rest,
       banner: `${bannerBaseUrl}${banner}`,
